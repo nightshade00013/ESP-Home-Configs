@@ -1,0 +1,66 @@
+# This is a simple always on YAML for Sonoff Basic's.
+# It works very well for a router, modem, or access point that you always want to be powered on
+# but would like the ability to restart the device with a single action.  The way this is setup 
+# you can trigger it to turn off but after the designated time it will power back on.  This is great 
+# if the device is also your WiFi provider as if it is off you can not turn it back on without 
+# direct user intervention.  This will allow you to trigger a reboot if a device is not functioning
+# correctly even if you are not at home.  It also powers up the device automatically if you have a
+# power outage.  You will want to set a static IP address outside of the DHCP range.
+
+esphome:
+  name: router
+  platform: ESP8266
+  board: esp01_1m
+  on_boot:
+    priority: -10
+    # turn power on at boot
+    then:
+      - switch.turn_on: relay
+wifi:
+  ssid: "Your-WiFi-SSID"
+  password: "Your-WiFi-Password"
+  manual_ip:
+    static_ip: 192.168.1.10
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Device Fallback Hotspot"
+    password: "Fallback-Pass"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Device Button"
+    on_press:
+      - switch.turn_off: relay
+      - delay: 30s
+      - switch.turn_on: relay
+switch:
+  - platform: gpio
+    name: "Device-Name"
+    icon: "mdi:toggle-switch"  # https://materialdesignicons.com/ this will automatically set an icon in Home Assistant
+    pin: GPIO12
+    id: relay
+    on_turn_off:
+    - switch.turn_off: relay
+    - delay: 30s
+    - switch.turn_on: relay
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes
