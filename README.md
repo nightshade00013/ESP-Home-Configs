@@ -1,4 +1,4 @@
-# ESP-Home-Configs
+# ESP-Home-Configs Information
 
 Information about ESPHome can be found here https://esphome.io/index.html
 
