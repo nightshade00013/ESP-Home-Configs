@@ -7,8 +7,11 @@
 # correctly even if you are not at home.  It also powers up the device automatically if you have a
 # power outage.  You will want to set a static IP address outside of the DHCP range.
 
+substitutions:
+  devicename: devicename # Edit this device name, lowercase only.
+
 esphome:
-  name: router
+  name: $devicename
   platform: ESP8266
   board: esp01_1m
   on_boot:
@@ -17,17 +20,17 @@ esphome:
     then:
       - switch.turn_on: relay
 wifi:
-  ssid: "Your-WiFi-SSID"
-  password: "Your-WiFi-Password"
-  manual_ip:
+  ssid: "Your-WiFi-SSID"  # This is your desired network SSID
+  password: "Your-WiFi-Password"  # This is your network password
+  manual_ip:  # Set a manual IP address that will work with your network here.
     static_ip: 192.168.1.10
     gateway: 192.168.1.1
     subnet: 255.255.255.0
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Device Fallback Hotspot"
-    password: "Fallback-Pass"
+    ssid: "$devicename Hotspot"
+    password: "Fallback-Pass"  # Edit this password.
 
 captive_portal:
 
@@ -45,14 +48,14 @@ binary_sensor:
       number: GPIO0
       mode: INPUT_PULLUP
       inverted: True
-    name: "Device Button"
+    name: "$devicename Button"
     on_press:
       - switch.turn_off: relay
       - delay: 30s
       - switch.turn_on: relay
 switch:
   - platform: gpio
-    name: "Device-Name"
+    name: "$devicename"
     icon: "mdi:toggle-switch"  # https://materialdesignicons.com/ this will automatically set an icon in Home Assistant
     pin: GPIO12
     id: relay
