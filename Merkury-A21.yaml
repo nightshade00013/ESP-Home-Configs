@@ -1,5 +1,16 @@
-substitutions:
-  devicename: devicename # Edit this device name, lowercase only.
+#  This is a script for a Tuya based RGBW bulb sold by walmart under the brand Merkury.  
+#  The bulb was sold for 17.88 locally.  The brightness control only effects the colors
+#  A 100% brightness with 0% on all colors with white at 0% will produce a dim cool white
+#  color bulb, setting a value to 100% will make the bulb that color.  This will turn the 
+#  light on automatically on power on and is set by default to do so with white on 100% but 
+#  can be adjusted as you see fit by changing the output settings listed between 
+#  lines 22 and 29.  In this fashion the light will act similar to a normal bulb 
+#  when turned on, however it will not know the difference between a turn on and a 
+#  power outage so you may want to lower the brightness if used in a bedroom or use 
+#  Home Assistant to turn a bulb on automatically when it connects but only outside 
+#  of when you will be sleeping.substitutions:
+
+devicename: devicename # Edit this device name, lowercase only.
 
 esphome:
   name: $devicename
