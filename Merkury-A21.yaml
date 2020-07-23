@@ -1,0 +1,67 @@
+substitutions:
+  devicename: devicename # Edit this device name, lowercase only.
+
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+  on_boot:
+    priority: -10
+    then:
+      - light.turn_on: #turns light on white at boot.  For different color set white to 0% and color to desired level, brightness controls colors only.
+          id: $devicename
+          brightness: 0%
+          red: 0%
+          green: 0%
+          blue: 0%
+          white: 100%
+          
+wifi:
+  ssid: "Your-WiFi-SSID"  # This is your desired network SSID
+  password: "Your-WiFi-Password"  # This is your network password
+  manual_ip:  # Set a manual IP address that will work with your network here.
+    static_ip: 192.168.1.11
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "$devicename Hotspot"
+    password: "Fallback-Pass"  # Edit this password.
+
+
+# Enable logging to ESPHome
+logger:
+  # Disable logging to serial
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+  
+# Setup OTA password
+ota:
+
+
+    
+output:
+  - platform: esp8266_pwm
+    id: output_blue
+    pin: GPIO4
+  - platform: esp8266_pwm
+    id: output_red
+    pin: GPIO13
+  - platform: esp8266_pwm
+    id: output_white
+    pin: GPIO14
+  - platform: esp8266_pwm
+    id: output_green
+    pin: GPIO5
+# Define a light entity
+light:
+  - platform: rgbw
+    name: $devicename
+    id: $devicename
+    red: output_red
+    green: output_green
+    blue: output_blue
+    white: output_white
