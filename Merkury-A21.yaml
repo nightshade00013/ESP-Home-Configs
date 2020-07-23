@@ -1,3 +1,4 @@
+#  Model number on the box by the barcode is MI-B210-999W
 #  This is a script for a Tuya based RGBW bulb sold by walmart under the brand Merkury.  
 #  The bulb was sold for 17.88 locally.  The brightness control only effects the colors
 #  A 100% brightness with 0% on all colors with white at 0% will produce a dim cool white
@@ -9,6 +10,7 @@
 #  power outage so you may want to lower the brightness if used in a bedroom or use 
 #  Home Assistant to turn a bulb on automatically when it connects but only outside 
 #  of when you will be sleeping.substitutions:
+
 
 devicename: devicename # Edit this device name, lowercase only.
 
