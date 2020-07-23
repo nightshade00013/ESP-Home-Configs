@@ -8,6 +8,8 @@
 #  power outage so you may want to lower the brightness if used in a bedroom or use 
 #  Home Assistant to turn a bulb on automatically when it connects but only outside 
 #  of when you will be sleeping.
+#  If you found this helpful please consider a donation through Amazon (it doesn't cost you a dime) 
+#  just go here https://amzn.to/2v74aiY (Amazon affiliate link) before you make an order.
 
 substitutions:
   devicename: devicename # Edit this device name, lowercase only.
