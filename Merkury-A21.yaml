@@ -5,13 +5,15 @@
 #  color bulb, setting a value to 100% will make the bulb that color.  This will turn the 
 #  light on automatically on power on and is set by default to do so with white on 100% but 
 #  can be adjusted as you see fit by changing the output settings listed between 
-#  lines 22 and 29.  In this fashion the light will act similar to a normal bulb 
+#  lines 28 and 32.  In this fashion the light will act similar to a normal bulb 
 #  when turned on, however it will not know the difference between a turn on and a 
 #  power outage so you may want to lower the brightness if used in a bedroom or use 
 #  Home Assistant to turn a bulb on automatically when it connects but only outside 
-#  of when you will be sleeping.substitutions:
+#  of when you will be sleeping.
+#  If you found this helpful please consider a donation through Amazon (it doesn't cost you a dime) 
+#  just go here https://amzn.to/2v74aiY (Amazon affiliate link) before you make an order.
 
-
+substitutions:
 devicename: devicename # Edit this device name, lowercase only.
 
 esphome:
