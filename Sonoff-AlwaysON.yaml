@@ -6,6 +6,8 @@
 # direct user intervention.  This will allow you to trigger a reboot if a device is not functioning
 # correctly even if you are not at home.  It also powers up the device automatically if you have a
 # power outage.  You will want to set a static IP address outside of the DHCP range.
+#  If you found this helpful please consider a donation through Amazon (it doesn't cost you a dime) 
+#  just go here https://amzn.to/2v74aiY (Amazon affiliate link) before you make an order.
 
 substitutions:
   devicename: devicename # Edit this device name, lowercase only.
