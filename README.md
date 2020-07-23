@@ -25,6 +25,11 @@ This config will allow you to automatically turn on a bulb when it is powered bu
 best for use outside of a bedroom unless the switch will be turned off at night.
 Tuya convert and it's infrmation can be found here https://github.com/ct-Open-Source/tuya-convert
 
+Merkury-A21.yaml - This is another tuya based bulb with a few changes.  The RGB and White pins are 
+different but was not hard to configure.  This is model number MI-BW210-999W found locally at Walmart 
+and possibly can be found online as well.  I was able to flash with Tuya convert without issue.
+Tuya convert and it's infrmation can be found here https://github.com/ct-Open-Source/tuya-convert
+
 
 And if you did and want to kick me a couple bones for the repairs on my truck 
 (probably a blown head-gasket which is going to really SUCK and honestly I need 
