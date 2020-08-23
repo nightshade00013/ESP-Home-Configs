@@ -20,6 +20,7 @@ esphome:
     priority: -10
     # turn power on at boot
     then:
+      - delay: 90s
       - switch.turn_on: relay
 wifi:
   ssid: "Your-WiFi-SSID"  # This is your desired network SSID
