@@ -1,0 +1,52 @@
+substitutions:
+  disp_name: WaterHeater  # Change the disp_name to something you want
+  devicename: waterheater  #The device's name, MUST BE LOWERCASE!!!!
+
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: "WiFiSSID"
+  password: "SuperSecretPassword"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "${disp_name} Hotspot"
+    password: "AnotherSecretPassword"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+web_server:  #Display information available on a web page to troubleshoot directly or access via web page.  The Sensor information will be displayed in a table along with a debug log.
+  port: 80
+
+switch:
+  - platform: gpio
+    name: "${disp_name}"
+    icon: "mdi:water-boiler"
+    pin: D1
+    id: relay
+    inverted: yes
+    
+dallas:
+  - pin: GPIO4
+  
+sensor:
+  - platform: dallas
+    address: 0x5f3c01f0964a4428
+    name: "Top Temperature"
+  - platform: dallas
+    address: 0x7d3c01f096e5de28
+    name: "Bottom Temperature"
+  - platform: dallas
+    address: 0x1e3c01f096a37328
+    name: "Output Temperature"  
