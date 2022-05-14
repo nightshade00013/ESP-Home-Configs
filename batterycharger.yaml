@@ -1,0 +1,70 @@
+#  This is built to work with a harbor freight battery charger like the CenTech 2/10 battery charger.
+#  The relay used is this one https://link.ventshop.net/chargerrelay
+#
+#
+#
+#
+
+substitutions:
+  disp_name: Battery Charger  # Change the disp_name to something you want
+  devicename: batterycharger  #The device's name, MUST BE LOWERCASE!!!!
+
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: "WiFiSSID"
+  password: "SuperSecretPassword"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "${disp_name} Hotspot"
+    password: "AnotherSecretPassword"
+
+captive_portal:
+
+
+logger:  # Enable logging
+
+
+api:  # Enable Home Assistant API
+
+ota:
+  # password: "YetAnotherPassword"
+
+web_server:  #Display information available on a web page to troubleshoot directly or access via web page.  The Sensor information will be displayed in a table along with a debug log.
+  port: 80
+
+switch:
+  - platform: gpio  #in this situation I am using a Double throw relay, in the NC position it will connect to the higher amperage windings.  In the NO position when the relay is activated you will get the lower amperage windings.
+    name: "${disp_name}"
+    pin: D1
+    id: relay
+    inverted: yes
+
+sensor:
+  - platform: wifi_signal
+    name: ${disp_name} WiFi Signal
+    filters:
+    - sliding_window_moving_average:
+        window_size: 15
+        send_every: 15
+  - platform: adc  # This is using a voltage divider on the onboard ADC pin.
+    pin: A0
+    name: "${disp_name}"
+    update_interval: 60s
+    filters:
+    - multiply: 16.27  #adjust this till you get the correct voltage.
+    - sliding_window_moving_average:
+        window_size: 10
+        send_every: 1
+    on_value_range:  #voltage values can be adjusted here.
+      - above: 13.75
+        then:
+          - switch.turn_on: "relay"
+      - below: 13.74
+        then:
+          - switch.turn_off: "relay"
+   
