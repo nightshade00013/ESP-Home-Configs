@@ -1,0 +1,34 @@
+substitutions:
+  disp_name: Name  # Change the disp_name to something you want
+  devicename: name  #The device's name, MUST BE LOWERCASE!!!!
+
+esphome:
+  name: $devicename
+
+esp32:                #These lines should match your board
+  board: nodemcu-32s  #
+
+
+wifi:
+  ssid: "WiFiSSID"  #Put your WiFi SSID here.
+  password: "SuperSecretPassword" #Put your WiFi password here.
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "${disp_name} Hotspot"
+    password: "AnotherSecretPassword" Create a password for the Hotspot mode
+
+captive_portal:
+
+
+logger:  # Enable logging
+
+
+api:  # Enable Home Assistant API
+
+ota:    # Enable Over The Air updates
+  password: "SecretOTApassword"    # Create an OTA Password if desired to lock updates
+  
+
+web_server:  #Display information available on a web page to troubleshoot directly or access via web page.  The Sensor information will be displayed in a table along with a debug log.
+  port: 80
